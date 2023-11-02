@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 
-function CustomInput() {
+type CustomInputProps = {
+  label: string;
+  placeholder: string;
+  isPassword: boolean;
+};
+
+function CustomInput(props: CustomInputProps) {
     const [text, onChangeText]= useState('')
   return (
-    <View>
-        
-      <Text style={styles.textInputStyle}>Email</Text>
+    <View style={styles.inputContainer}>
+      <Text style={styles.textInputStyle}>{props.label}</Text>
       <TextInput
         style={styles.inputStyle}
         onChangeText={onChangeText}
         value={text}
-        placeholder="Email"
+        placeholder={props.placeholder}
+        secureTextEntry={props.isPassword}
       />
     </View>
   )
@@ -28,6 +34,10 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 20,
         paddingHorizontal: 10
+    },
+    inputContainer:{
+        paddingHorizontal: 20,
+        paddingVertical: 10
     }
 });
 

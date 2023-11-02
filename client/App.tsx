@@ -10,7 +10,8 @@ function App(): JSX.Element {
   return (
     <SafeAreaView >
      <Text>Hello world</Text>
-     <CustomInput/>
+     <CustomInput label={'Email'} placeholder={'mail@email.com'} isPassword={false}/>
+     <CustomInput label={'Password'} placeholder={'Password'} isPassword={true} />
     </SafeAreaView>
   );
 }
