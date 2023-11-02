@@ -4,11 +4,13 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
+import CustomInput from './components/CustomInput';
 
 function App(): JSX.Element {
   return (
     <SafeAreaView >
      <Text>Hello world</Text>
+     <CustomInput/>
     </SafeAreaView>
   );
 }
