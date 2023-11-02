@@ -5,13 +5,15 @@ import {
   Text,
 } from 'react-native';
 import CustomInput from './components/CustomInput';
+import CustomButton from './components/CustomButton';
 
 function App(): JSX.Element {
+  const onPress = ()=>{}
   return (
     <SafeAreaView >
-     <Text>Hello world</Text>
      <CustomInput label={'Email'} placeholder={'mail@email.com'} isPassword={false}/>
      <CustomInput label={'Password'} placeholder={'Password'} isPassword={true} />
+     <CustomButton lable={'Sign in'} onPress={onPress} />
     </SafeAreaView>
   );
 }
