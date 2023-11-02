@@ -1,24 +1,19 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-} from 'react-native';
-import CustomInput from './components/CustomInput';
-import CustomButton from './components/CustomButton';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Signin from './screens/Signin';
+
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
-  const onPress = ()=>{}
   return (
-    <SafeAreaView >
-     <CustomInput label={'Email'} placeholder={'mail@email.com'} isPassword={false}/>
-     <CustomInput label={'Password'} placeholder={'Password'} isPassword={true} />
-     <CustomButton lable={'Sign in'} onPress={onPress} />
-    </SafeAreaView>
+     <NavigationContainer>
+      <Stack.Navigator initialRouteName="home">
+        <Stack.Screen name="home" component={Signin} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-});
 
 export default App;
