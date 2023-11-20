@@ -8,8 +8,8 @@ const Stack = createNativeStackNavigator();
 function App(): JSX.Element {
   return (
      <NavigationContainer>
-      <Stack.Navigator initialRouteName="home">
-        <Stack.Screen name="home" component={Signin} />
+      <Stack.Navigator initialRouteName="signin">
+        <Stack.Screen name="signin" component={Signin} />
       </Stack.Navigator>
     </NavigationContainer>
   );
