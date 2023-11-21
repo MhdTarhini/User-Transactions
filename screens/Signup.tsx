@@ -10,7 +10,7 @@ import {
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 
-function Signin(): JSX.Element {
+function Signup(): JSX.Element {
   const onPress = ()=>{}
   return (
     <SafeAreaView >
@@ -18,12 +18,13 @@ function Signin(): JSX.Element {
         <Image style={styles.logoImage} source={require('../assets/logo.png')}/>
         <Text style={styles.logoText}>User Transactions</Text>
       </View>
+     <CustomInput label={'username'} placeholder={'username'} isPassword={false}/>
      <CustomInput label={'Email'} placeholder={'mail@email.com'} isPassword={false}/>
      <CustomInput label={'Password'} placeholder={'password'} isPassword={true} />
-     <CustomButton lable={'Sign in'} onPress={onPress} />
+     <CustomButton lable={'Sign up'} onPress={onPress} />
      <View style={styles.BottomText}>
-     <Text>Don't have an account? </Text>
-     <TouchableOpacity><Text style={styles.BottomTextSignUp}>Sign up</Text></TouchableOpacity>
+     <Text>Already have an account ? </Text>
+     <TouchableOpacity><Text style={styles.BottomTextSignIn}>Sign in</Text></TouchableOpacity>
      </View>
     </SafeAreaView>
   );
@@ -53,10 +54,10 @@ const styles = StyleSheet.create({
     alignItems:"center",
   },
 
-  BottomTextSignUp:{
+  BottomTextSignIn:{
     fontSize: 18,
     fontWeight:"700"
   }
 });
 
-export default Signin;
+export default Signup;
