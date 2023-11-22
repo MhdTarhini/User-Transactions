@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -9,13 +9,41 @@ import {
 } from 'react-native';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
+import {useDispatch, useSelector} from 'react-redux';
+import {LoginUser} from '../redux/user/userReducer';
+import {IUserStore} from '../redux/user/types';
 
 interface Props {
   navigation: any;
 }
 
 const SigninScreen: React.FC<Props> = ({navigation}) => {
-  const onPress = () => {};
+  const [userInfo, setUserInfo] = useState({
+    email: '',
+    password: '',
+  });
+  const dispatch = useDispatch();
+
+  const handleInputChange = (fieldName: string, text: string) => {
+    setUserInfo(prevState => ({
+      ...prevState,
+      [fieldName]: text,
+    }));
+  };
+
+  const onPress = () => {
+    const userData = {
+      token: 'token',
+      userInfo: {
+        username: userInfo.email,
+        email: userInfo.email,
+      },
+      active: true,
+      isAuthenticated: true,
+    };
+    dispatch(LoginUser(userData));
+    navigation.navigate('home');
+  };
   return (
     <SafeAreaView>
       <View style={styles.logoContainer}>
@@ -29,11 +57,13 @@ const SigninScreen: React.FC<Props> = ({navigation}) => {
         label={'Email'}
         placeholder={'mail@email.com'}
         isPassword={false}
+        onChangeText={text => handleInputChange('email', text)}
       />
       <CustomInput
         label={'Password'}
         placeholder={'password'}
         isPassword={true}
+        onChangeText={text => handleInputChange('password', text)}
       />
       <CustomButton lable={'Sign in'} onPress={onPress} />
       <View style={styles.BottomText}>

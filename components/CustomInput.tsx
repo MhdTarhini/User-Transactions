@@ -5,22 +5,28 @@ type CustomInputProps = {
   label: string;
   placeholder: string;
   isPassword: boolean;
+  onChangeText: (text: string) => void;
 };
 
 function CustomInput(props: CustomInputProps) {
-    const [text, onChangeText]= useState('')
+  const [text, setText] = useState('');
+
+  const handleTextChange = (inputText: string) => {
+    setText(inputText);
+    props.onChangeText(inputText);
+  };
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.textInputStyle}>{props.label}</Text>
       <TextInput
         style={styles.inputStyle}
-        onChangeText={onChangeText}
+        onChangeText={handleTextChange}
         value={text}
         placeholder={props.placeholder}
         secureTextEntry={props.isPassword}
       />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

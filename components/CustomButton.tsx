@@ -1,19 +1,19 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
 
-interface  buttonProps extends TouchableOpacityProps{
-    lable: string,
-
+interface buttonProps extends TouchableOpacityProps {
+  lable: string;
+  onPress: () => void;
 }
 
 function CustomButton(props: buttonProps) {
   return (
     <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={props.onPress}>
         <Text>{props.lable}</Text>
       </TouchableOpacity>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
