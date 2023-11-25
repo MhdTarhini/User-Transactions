@@ -1,35 +1,64 @@
-import React from 'react';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import CustomInput from '../components/CustomInput';
-import CustomButton from '../components/CustomButton';
+import React, {useState} from 'react';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {IUserStore} from '../redux/user/types';
 import Card from '../components/TransactionCard';
+import CustomButton from '../components/CustomButton';
+import {faker} from '@faker-js/faker';
 
 interface Props {
   navigation: any;
 }
 
 const HomeScreen: React.FC<Props> = ({navigation}) => {
+  const [number, setNumber] = useState(5);
   const userInfo = useSelector(
     (state: {user: IUserStore}) => state.user.userInfo,
   );
-  const onPress = () => {};
+
+  const transactionCard = Array.from({length: number}, (_, index) => {
+    let amount = faker.number.int({max: 500});
+    return (
+      <Card
+        key={index}
+        date={faker.date.anytime()}
+        amount={amount}
+        points={amount / 50}
+      />
+    );
+  });
   return (
     <ScrollView>
-      <Text>{userInfo.email}</Text>
-      <Card date="2023-11-22" amount={50} points={10} />
+      <View style={styles.navbar}>
+        <Image
+          style={styles.logoImage}
+          source={require('../assets/logo.png')}
+        />
+        <Text>{userInfo.username}</Text>
+      </View>
+      <CustomButton
+        lable={'New'}
+        onPress={() => {
+          setNumber(number + 1);
+        }}
+      />
+      {transactionCard}
     </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  navbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 20,
+  },
+  logoImage: {
+    width: 50,
+    height: 50,
+  },
+});
 
 export default HomeScreen;

@@ -8,4 +8,5 @@ export interface IUserStore {
 export interface IUserInfoStore {
   username: string;
   email: string;
+  points: number;
 }

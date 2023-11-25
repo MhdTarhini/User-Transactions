@@ -2,17 +2,18 @@ import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
 interface Props {
-  date: string;
+  date: Date;
   amount: number;
   points: number;
 }
 
 const Card: React.FC<Props> = ({date, amount, points}) => {
+  const formattedDate = date.toISOString().split('T')[0];
   return (
     <ScrollView>
       <View style={styles.cardContainer}>
         <View style={styles.cardRow}>
-          <Text>Date: {date}</Text>
+          <Text>Date: {formattedDate}</Text>
         </View>
         <View style={styles.cardRow}>
           <Text>Amount: ${amount}</Text>

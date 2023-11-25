@@ -11,7 +11,7 @@ import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {LoginUser} from '../redux/user/userReducer';
-import {IUserStore} from '../redux/user/types';
+import {faker} from '@faker-js/faker';
 
 interface Props {
   navigation: any;
@@ -35,8 +35,9 @@ const SigninScreen: React.FC<Props> = ({navigation}) => {
     const userData = {
       token: 'token',
       userInfo: {
-        username: userInfo.email,
-        email: userInfo.email,
+        username: faker.person.fullName(),
+        email: faker.internet.email(),
+        points: faker.number.int(),
       },
       active: true,
       isAuthenticated: true,

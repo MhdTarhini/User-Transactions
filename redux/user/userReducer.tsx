@@ -7,6 +7,7 @@ const initialState: IUserStore = {
   userInfo: {
     username: '',
     email: '',
+    points: 0,
   },
   active: false,
   isAuthenticated: false,
