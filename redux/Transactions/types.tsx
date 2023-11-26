@@ -1,15 +1,10 @@
 export interface ITransaction {
-  date: string;
+  date: Date;
   amount: number;
   points: number;
-  userInfo: IUserInfoStore;
+  userEmail: string;
 }
 
 export interface ITransactionsStore {
   transactions: ITransaction[];
-}
-
-export interface IUserInfoStore {
-  username: string;
-  email: string;
 }
