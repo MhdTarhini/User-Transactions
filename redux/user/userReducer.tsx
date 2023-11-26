@@ -7,22 +7,28 @@ const initialState: IUserStore = {
   userInfo: {
     username: '',
     email: '',
-    points: 0,
   },
+  points: 0,
   active: false,
   isAuthenticated: false,
 };
+
+interface AddPointsPayload {
+  points: number;
+}
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
     LoginUser: (state, action: PayloadAction<IUserStore>) => {
-      // state = action.payload;
       state.token = action.payload.token;
       state.userInfo = action.payload.userInfo;
       state.active = action.payload.active;
       state.isAuthenticated = action.payload.isAuthenticated;
+    },
+    addPoints: (state, action: PayloadAction<AddPointsPayload>) => {
+      state.points += action.payload.points;
     },
     LogoutUser: state => {
       state = initialState;
@@ -30,6 +36,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const {LoginUser, LogoutUser} = userSlice.actions;
+export const {LoginUser, LogoutUser, addPoints} = userSlice.actions;
 
 export default userSlice.reducer;

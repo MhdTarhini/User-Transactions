@@ -37,8 +37,8 @@ const SigninScreen: React.FC<Props> = ({navigation}) => {
       userInfo: {
         username: faker.person.fullName(),
         email: faker.internet.email(),
-        points: faker.number.int(),
       },
+      points: 100,
       active: true,
       isAuthenticated: true,
     };

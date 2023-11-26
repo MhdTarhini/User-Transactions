@@ -3,10 +3,10 @@ export interface IUserStore {
   userInfo: IUserInfoStore;
   active: boolean;
   isAuthenticated: boolean;
+  points: number;
 }
 
 export interface IUserInfoStore {
   username: string;
   email: string;
-  points: number;
 }
