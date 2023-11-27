@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {ScrollView, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {IUserStore} from '../redux/user/types';
 import Card from '../components/TransactionCard';

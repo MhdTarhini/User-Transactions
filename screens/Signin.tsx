@@ -12,13 +12,28 @@ import CustomButton from '../components/CustomButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {LoginUser} from '../redux/user/userReducer';
 import {faker} from '@faker-js/faker';
+import {validateUserData} from '../components/validateUserInfo';
 
 interface Props {
   navigation: any;
 }
 
+interface UserInfo {
+  email: string;
+  password: string;
+}
+
+interface ErrorMessage {
+  email: string;
+  password: string;
+}
+
 const SigninScreen: React.FC<Props> = ({navigation}) => {
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    email: '',
+    password: '',
+  });
+  const [errorMessage, setErrorMessage] = useState<ErrorMessage>({
     email: '',
     password: '',
   });
@@ -32,18 +47,23 @@ const SigninScreen: React.FC<Props> = ({navigation}) => {
   };
 
   const onPress = () => {
-    const userData = {
-      token: 'token',
-      userInfo: {
-        username: faker.person.fullName(),
-        email: faker.internet.email(),
-      },
-      points: 100,
-      active: true,
-      isAuthenticated: true,
-    };
-    dispatch(LoginUser(userData));
-    navigation.navigate('home');
+    const {isValid, errors} = validateUserData(userInfo);
+    if (isValid) {
+      const userData = {
+        token: 'token',
+        userInfo: {
+          username: faker.person.fullName(),
+          email: faker.internet.email(),
+        },
+        points: 100,
+        active: true,
+        isAuthenticated: true,
+      };
+      dispatch(LoginUser(userData));
+      navigation.navigate('home');
+    } else {
+      setErrorMessage(errors);
+    }
   };
   return (
     <SafeAreaView>
@@ -54,18 +74,28 @@ const SigninScreen: React.FC<Props> = ({navigation}) => {
         />
         <Text style={styles.logoText}>User Transactions</Text>
       </View>
-      <CustomInput
-        label={'Email'}
-        placeholder={'mail@email.com'}
-        isPassword={false}
-        onChangeText={text => handleInputChange('email', text)}
-      />
-      <CustomInput
-        label={'Password'}
-        placeholder={'password'}
-        isPassword={true}
-        onChangeText={text => handleInputChange('password', text)}
-      />
+      <View style={styles.inputContainer}>
+        <CustomInput
+          label={'Email'}
+          placeholder={'mail@email.com'}
+          isPassword={false}
+          keyboardType="email-address"
+          onChangeText={text => handleInputChange('email', text)}
+        />
+        {errorMessage.email && (
+          <Text style={styles.error}>{errorMessage.email}</Text>
+        )}
+        <CustomInput
+          label={'Password'}
+          placeholder={'password'}
+          isPassword={true}
+          onChangeText={text => handleInputChange('password', text)}
+          keyboardType="default"
+        />
+        {errorMessage.password && (
+          <Text style={styles.error}>{errorMessage.password}</Text>
+        )}
+      </View>
       <CustomButton lable={'Sign in'} onPress={onPress} />
       <View style={styles.BottomText}>
         <Text>Don't have an account? </Text>
@@ -108,6 +138,16 @@ const styles = StyleSheet.create({
   BottomTextSignUp: {
     fontSize: 18,
     fontWeight: '700',
+  },
+  inputContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  error: {
+    fontSize: 12,
+    color: 'red',
   },
 });
 
